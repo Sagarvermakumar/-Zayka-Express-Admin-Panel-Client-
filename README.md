@@ -55,14 +55,58 @@ All rights reserved © 2025 Sagar Verma. Do not copy, modify, or redistribute.**
 
 ### 🍽️ Menu Management
 <p align="center">
-  <img src="https://via.placeholder.com/1000x550.png?text=Menu+Management+Screen" width="80%" alt="Menu Management"/>
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562328/u6s3fptssz1zj9abb4h7.png"/>
 </p>
 
 ---
 
+### 📦 Add Menu Item
+<p align="center">
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562326/m5pyjo2pg9wmweruluph.png"/>
+</p>
+
+---
+
+
+
+### 📦 User List
+<p align="center">
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562329/xipnqomtzt88aq5jp9mv.png"/>
+</p>
+---
+
 ### 📦 Order Tracking
 <p align="center">
-  <img src="https://via.placeholder.com/1000x550.png?text=Order+Tracking+Screen" width="80%" alt="Order Tracking"/>
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562329/gtmr0wrno8ljetvmlakz.png"/>
 </p>
+
+---
+
+
+### 📦 Update Order Status
+<p align="center">
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562328/ldo2iv09i38nmyl8emay.png"/>
+</p>
+
+---
+
+---
+
+
+### 📦 Admin Profile
+<p align="center">
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562327/iceh9kutmmwjfl7qlvui.png"/>
+</p>
+
+---
+
+
+
+### 📦 User Details
+<p align="center">
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562329/d9il5z6a2jv7l68n5asj.png"/>
+</p>
+
+---
 
 
