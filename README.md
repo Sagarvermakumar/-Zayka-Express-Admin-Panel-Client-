@@ -48,7 +48,7 @@ All rights reserved © 2025 Sagar Verma. Do not copy, modify, or redistribute.**
 
 ### 🖥️ Dashboard Overview
 <p align="center">
-  <img src="https://via.placeholder.com/1000x550.png?text=Dashboard+Overview" width="80%" alt="Dashboard View"/>
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754562327/vh61b9feehaadgje9bp3.png"/>
 </p>
 
 ---
