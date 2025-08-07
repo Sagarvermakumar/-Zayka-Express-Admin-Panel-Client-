@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteCancelledOrderApi, getAllOrdersApi, getOrderByIDApi, updateOrderStatusApi } from "./OrderApi";
-
+import {toast} from 'react-hot-toast'
 
 // get all orders
-export const getAllOrders = createAsyncThunk("/orders/all", async (_, thunkAPI) => {
+export const getAllOrders = createAsyncThunk("/orders/all", async (selectDate, thunkAPI) => {
   try {
-    const res = await getAllOrdersApi();
+
+    
+    const res = await getAllOrdersApi(selectDate);
     return res.data.orders;
   } catch (error) {
     console.error(`Failed to fetch Orders ${error.message}`);
@@ -30,12 +32,14 @@ export const getOrderByID = createAsyncThunk("/orders/getById", async (id, thunk
 
 
 // update order status
-export const updateOrderStatus = createAsyncThunk("/orders/updateStatus", async (id, thunkAPI) => {
+export const updateOrderStatus = createAsyncThunk("/orders/updateStatus", async ({id,status}, thunkAPI) => {
   try {
-    const res = await updateOrderStatusApi(id);
+   
+    const res = await updateOrderStatusApi(id,status);
+    toast.success(res.data.message)
     return res.data;
   } catch (error) {
-    console.error(`Failed to update Order status ${error.message}`);
+    console.error(`Failed to update Order status ${error}`);
     return thunkAPI.rejectWithValue(
       error.response?.data.message || "Failed To Update Order Status"
     );
@@ -59,6 +63,7 @@ const initialState = {
   orders: null,
   vendorOrders:null,
   isLoading: false,
+  isLoadingAllOrders :false,
   error: null,
 };
 
@@ -70,15 +75,17 @@ const ordersSlice = createSlice({
     builder
     // all orders
     .addCase(getAllOrders.pending, (state) => {
-      state.isLoading = true;
+      state.isLoadingAllOrders = true;
       state.error = null;
     }).addCase(getAllOrders.fulfilled, (state,action)=>{
-        state.isLoading =false;
+        state.isLoadingAllOrders =false;
         state.orders = action.payload;
     }).addCase(getAllOrders.rejected, (state,action)=>{
-        state.isLoading = false;
+        state.isLoadingAllOrders = false;
         state.error = action.payload;
+        state.orders = null
     })
+    
     // get order by ID
     .addCase(getOrderByID.pending, (state) => {
       state.isLoading = true;
@@ -100,7 +107,7 @@ const ordersSlice = createSlice({
     }).addCase(updateOrderStatus.fulfilled, (state, action) => {
       state.isLoading = false;
       state.orders = state.orders.map(order =>
-        order._id === action.payload._id ? action.payload : order
+        order._id === action.payload.id ? action.payload.order : order
       );
     }).addCase(updateOrderStatus.rejected, (state, action) => {
       state.isLoading = false;
@@ -112,10 +119,12 @@ const ordersSlice = createSlice({
       state.error = null;
     }).addCase(deleteCancelledOrder.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.orders = state.orders.filter(order => order._id !== action.payload._id);
+      state.orders = state.orders.filter(order => order._id !== action.payload.orderId);
+      toast.success(action.payload.message || "Order Deleted Successfully")
     }).addCase(deleteCancelledOrder.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      toast.error(action.payload || "Failed To delete Order")
     });
   },
 });

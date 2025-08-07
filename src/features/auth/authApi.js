@@ -20,8 +20,8 @@ export const updateProfileApi = (data) => API.patch("/user/update-profile", data
 
 
 // update avatar
-export const updateAvatarApi = (formData) => {
-  return API.patch("/user/profile/update/avatar", formData, {
+export const updateAvatarApi = (avatar) => {
+  return API.patch("/user/profile/update/avatar", avatar, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

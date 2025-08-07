@@ -7,13 +7,16 @@ import {
     Flex,
     Stack,
     Text,
-    Container
+    Container,
+    HStack,
+    Avatar
 } from '@chakra-ui/react';
 import ProfilePictureUpdater from './ProfilePictureUpdater';
+import UserContact from './UserContact';
 
 const UserDetailsCard = ({ user }) => {
 
-console.log(user)
+    console.log(user)
 
 
     return (
@@ -30,11 +33,14 @@ console.log(user)
                 bg="rgba(22, 8, 8, 0.25)"
             >
                 <Flex direction={["column", "row"]} alignItems="center" mb={6} gap={4}>
-                    <ProfilePictureUpdater name={user?.name} avatar={user?.avatar?.url} />
+                    {
+                        user.role === "Admin" ? (<ProfilePictureUpdater name={user?.name} avatar={user?.avatar?.url} id={user._id} />) : (<Avatar src={user.avatar.url} name={user.name} size="2xl" />)
+                    }
                     <Box>
                         <Text fontSize="2xl" fontWeight="bold">{user.name}</Text>
                         <Text color="gray.500" fontSize="sm">{user.email}</Text>
-                        <Text fontSize="sm">📱 {user.phoneNumber}</Text>
+                             <UserContact phoneNumber={user.phoneNumber} />
+
                     </Box>
                 </Flex>
 
@@ -42,10 +48,10 @@ console.log(user)
                     <Badge px={4} py={1} colorScheme={user.role === 'Admin' ? 'purple' : 'blue'}>
                         {user.role}
                     </Badge>
-                    <Badge colorScheme={user.status === 'active' ? 'green' : 'red'}>
+                    <Badge px={4} py={1} colorScheme={user.status === 'active' ? 'green' : 'red'}>
                         {user.status}
                     </Badge>
-                    <Badge colorScheme={user.isVerified ? 'green' : 'yellow'}>
+                    <Badge px={4} py={1} colorScheme={user.isVerified ? 'green' : 'yellow'}>
                         {user.isVerified ? 'Verified' : 'Not Verified'}
                     </Badge>
                 </Stack>
@@ -62,12 +68,23 @@ console.log(user)
                 <Divider my={3} />
 
                 <Box>
+
+
                     <Text fontWeight="bold" mb={2}>📍 Address Details</Text>
 
                     {user.address && user.address.length > 0 ? (
                         user.address.map((addr, index) => (
                             <Box key={index} fontSize="md" p={3} mb={3} bg="transparent" borderRadius="md" boxShadow="md">
-                                <Text fontWeight="bold">🏷️ Label: {addr.label}</Text>
+                                <HStack mb={4}  >
+                                    {
+                                        addr.isDefaultAddress && <Badge px={4} py={1} width={'fit-content'} colorScheme={addr.isDefaultAddress ? 'green' : 'blue'}>
+                                            Current Address
+                                        </Badge>
+                                    }
+                                    <Text fontWeight="bold">🏷️ Label: {addr.label} </Text>
+
+
+                                </HStack>
                                 <Text><b>Address:</b> {addr.addressLine}</Text>
                                 <Text><b>Landmark:</b> {addr.landmark?.join(', ') || 'N/A'}</Text>
                                 <Text><b>City:</b> {addr.city}</Text>

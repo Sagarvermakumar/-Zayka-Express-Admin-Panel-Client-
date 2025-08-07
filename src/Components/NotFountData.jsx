@@ -9,7 +9,7 @@ const NotFoundData = ({ label = "Page", redirectUrl = "/", subLabel, btnLabel="G
   return (
      <Box
       minH="full"
-      height={'100vh'}
+      height={'75vh'}
       p={6}
       display="flex"
       alignItems="center"

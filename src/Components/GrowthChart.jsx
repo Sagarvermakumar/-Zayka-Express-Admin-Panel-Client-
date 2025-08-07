@@ -1,24 +1,77 @@
-import { Box, Heading } from "@chakra-ui/react";
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  LabelList,
 } from "recharts";
-
+import { Box, Heading } from "@chakra-ui/react";
 import PropTypes from 'prop-types';
 
-const GrowthChart = ({ title, data, dataKey }) => (
-  <Box mt={10}>
-    <Heading size="md" mb={4}>{title}</Heading>
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data}>
-        <XAxis dataKey="month" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey={dataKey} fill="#e00b6bff" />
-      </BarChart>
-    </ResponsiveContainer>
-  </Box>
-);
+const GrowthChart = ({ title, data, dataKey }) => { 
+  return (
+    <Box mt={10} p={4} bg="transparent" borderRadius="lg" shadow="dark-lg">
+      <Heading size="md" mb={4} color="#fff">
+        {title}
+      </Heading>
+      <ResponsiveContainer width="100%" height={500}>
+        <BarChart
+          data={data}
+          margin={{ top: 20, right: 30, left: 10, bottom: 10 }}
+        >
+          {/* Grid lines */}
+          <CartesianGrid strokeDasharray="3 3" stroke="#555" />
+
+          {/* X Axis - Months */}
+          <XAxis
+            dataKey="month"
+            stroke="#ccc"
+            tick={{ fontSize: 12 }}
+            axisLine={{ stroke: "#8884d8" }}
+            tickLine={false}
+          />
+
+          {/* Y Axis */}
+          <YAxis
+            stroke="#ccc"
+            tick={{ fontSize: 12 }}
+            axisLine={{ stroke: "#ff0080" }}
+            tickLine={false}
+          />
+
+          {/* Tooltip with custom styles */}
+          <Tooltip
+            cursor={{ fill: "rgba(255,255,255,0.05)" }}
+            contentStyle={{
+              backgroundColor: "#050b16ff",
+              borderColor: "#e00b6b",
+              color: "#fff",
+            }}
+            labelStyle={{ color: "#e00b6b" }}
+          />
+
+          <Legend verticalAlign="top" height={36} />
+
+          {/* Bar with labels */}
+          <Bar
+            dataKey={dataKey}
+            fill="#e00b6b"
+            barSize={40}
+            radius={[10, 10, 0, 0]}
+            name="Count"
+          >
+            <LabelList dataKey={dataKey} position="top" fill="#fff" fontSize={12} />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </Box>
+  );
+};
+
 
 GrowthChart.propTypes = {
   title: PropTypes.string.isRequired,

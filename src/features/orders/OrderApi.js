@@ -6,6 +6,8 @@ const API = axios.create({
 });
 
 export const getOrderByIDApi = (id) => API.get(`/${id}`);
-export const getAllOrdersApi = () => API.get("/all");
-export const updateOrderStatusApi = (id) => API.patch(`/update-status/${id}`);
+export const getAllOrdersApi = (selectDate) => API.get("/all",{
+    params: { date:selectDate },
+  });
+export const updateOrderStatusApi = (id,status) => API.patch(`/update-status/${id}?status=${status}`);
 export const deleteCancelledOrderApi = (id) => API.delete(`/delete/${id}`);

@@ -39,7 +39,7 @@ const AddMenuItems = () => {
 
   const [previewUrl, setPreviewUrl] = useState("")
 
-  console.log(formData)
+ 
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -70,7 +70,8 @@ const AddMenuItems = () => {
 
 
   const itemDetails = useSelector(state => state.menuItems.itemDetails)
-  console.log(itemDetails)
+  const isAddMenuItemLoading = useSelector(state => state.menuItems.isAddMenuItemLoading)
+   
 
 
   useEffect(() => {
@@ -380,8 +381,8 @@ useEffect(() => {
               </Button>) : (<Button
                 leftIcon={<FaPlus />}
                 type="submit"
-                isLoading={false}
-                loadingText="Uploading Menu Item..."
+                isLoading={isAddMenuItemLoading}
+                loadingText="Adding..."
                 mb={4}
                 ml={{ sm: 0, md: 4 }}
                 width={{ sm: 'full', md: "fit-content" }}

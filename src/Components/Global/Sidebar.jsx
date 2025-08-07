@@ -24,19 +24,46 @@ export default function Sidebar({ children }) {
 
   return (
     <Box minH="100vh" bg="transparent"
+   
     >
-      <SidebarContent onClose={onClose} display={{ base: 'none', md: 'block' }} />
+       <Box
+        position="absolute"
+        bottom="0%"
+        left="0%"
+        w="200px"
+        h="full"
+        bg="purple"
+        borderRadius="50%"
+        filter="blur(100px)"
+        zIndex={0}
+        opacity={0.3}
+      />
+  
+      {/* Fixed Sidebar for Desktop */}
+      <SidebarContent
+        onClose={onClose}
+        display={{ base: 'none', md: 'block' }}
+      />
 
+      {/* Drawer Sidebar for Mobile */}
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
-        <DrawerContent bg={'rgba(0,0,0,0.6)'} pb={4}
-          backdropFilter='blur(8px) hue-rotate(10deg)'  >
+        <DrawerContent
+          bg="rgba(0,0,0,0.6)"
+          backdropFilter="blur(8px) hue-rotate(10deg)"
+          pb={4}
+        >
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
 
+      {/* Mobile Nav */}
       <MobileNav onOpen={onOpen} display={{ base: 'flex', md: 'none' }} />
 
-      <Box ml={{ base: 0, md: 60 }} p={{ base: 0, md: 4 }} >
+      {/* Main Content */}
+      <Box
+        ml={{ base: 0, md: 80 }} // match Sidebar width
+        p={{ base: 2, md: 4 }}
+      >
         {children || <Outlet />}
       </Box>
     </Box>
@@ -47,7 +74,7 @@ Sidebar.propTypes = {
   children: PropTypes.node,
 }
 
-// ✅ SidebarContent with Nested Menus
+// ✅ SidebarContent with Fixed Position
 const SidebarContent = ({ onClose, ...rest }) => {
   const location = useLocation()
   const [openMenu, setOpenMenu] = useState(null)
@@ -59,16 +86,24 @@ const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       bg="#09090965"
-      overflow="hidden"
       borderRight="1px"
       borderRightColor="gray.700"
-      w={{ base: 'full', md: 60 }}
+      w={{ base: 'full', md: 80 }}
       pos="fixed"
+      left="0"
+      top="0"
       h="100vh"
+      zIndex="1000"
+      overflowY="auto"
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} bg={'red'} boxShadow={'1px 1px 20px 10px rgba(246, 237, 237, 0.1)'} />
+        <CloseButton
+          display={{ base: 'flex', md: 'none' }}
+          onClick={onClose}
+          bg="red"
+          boxShadow="1px 1px 20px 10px rgba(246, 237, 237, 0.1)"
+        />
       </Flex>
 
       {adminLinkItems.map((link) => (
@@ -81,7 +116,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
                 pl="4"
                 mx="4"
                 borderRadius="md"
-                color={location.pathname.startsWith(link.path) ? 'red.400' : 'gray.400'}
+                color={
+                  location.pathname.startsWith(link.path)
+                    ? 'red.400'
+                    : 'gray.400'
+                }
                 _hover={{ color: '#fff', bg: 'rgba(0,0,0,0.2)' }}
                 cursor="pointer"
                 onClick={() => handleToggle(link.name)}
@@ -90,7 +129,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
                 {link.name}
                 <Icon
                   ml="auto"
-                  as={openMenu === link.name ? FiChevronDown : FiChevronRight}
+                  as={
+                    openMenu === link.name ? FiChevronDown : FiChevronRight
+                  }
                 />
               </Flex>
 
@@ -128,8 +169,8 @@ SidebarContent.propTypes = {
   onClose: PropTypes.func.isRequired,
 }
 
-// ✅ NavItem for Sidebar Links
-const NavItem = ({ icon, children, path, isActive, pl = "4", ...rest }) => {
+// ✅ Sidebar Link Items
+const NavItem = ({ icon, children, path, isActive, pl = '4', ...rest }) => {
   return (
     <Link to={path} style={{ textDecoration: 'none' }}>
       <Flex
@@ -137,12 +178,16 @@ const NavItem = ({ icon, children, path, isActive, pl = "4", ...rest }) => {
         p="3"
         pl={pl}
         mx="4"
-        fontFamily={'monospace'}
-        fontSize={'2xl'}
+        fontFamily="monospace"
+        fontSize="2xl"
         borderRadius="md"
         color={isActive ? '#f80' : 'gray.100'}
         bg={isActive ? 'rgba(0,0,0,0.4)' : 'transparent'}
-        _hover={{ color: '#ffffff', bg: 'rgba(0,0,0,0.4)', fontWeight: 700, }}
+        _hover={{
+          color: '#ffffff',
+          bg: 'rgba(0,0,0,0.4)',
+          fontWeight: 700,
+        }}
         cursor="pointer"
         {...rest}
       >
@@ -163,10 +208,10 @@ NavItem.propTypes = {
 
 // ✅ Mobile Navigation Bar
 const MobileNav = ({ onOpen, ...rest }) => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth)
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
+      ml={{ base: 0, md: 80 }}
       px={{ base: 4, md: 6 }}
       height="20"
       alignItems="center"

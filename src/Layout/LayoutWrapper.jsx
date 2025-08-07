@@ -1,21 +1,24 @@
 // src/components/LayoutWrapper.jsx
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 const LayoutWrapper = ({ children }) => {
   return (
-    <Box
-      minH="95vh"
+    <Flex
+      minHeight="100vh"
+      width="100%"
+      justify="center"
+      align="center"
       
+        
+      p={{sm:4,md:8}}   
     >
-      <Container maxW="container.xl">
+      <Box width="100%" maxW="8xl"    mb={8}>
         {children}
-      </Container>
-    </Box>
+      </Box>
+    </Flex>
   );
 };
-
-
 
 LayoutWrapper.propTypes = {
   children: PropTypes.node.isRequired,

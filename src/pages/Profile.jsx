@@ -12,6 +12,7 @@ import UserDetailsCard from "../Components/UserDetailsCard.jsx";
 import { logoutUser } from "../features/auth/authSlice";
 import Header from "../Components/Heading.jsx";
 import {useNavigate} from 'react-router-dom'
+import LayoutWrapper from "../Layout/LayoutWrapper.jsx";
 
 
 const Profile = () => {
@@ -26,10 +27,12 @@ const Profile = () => {
 
   }
   return (
-    <Box p={4} bg={'transparent'} >
+    <LayoutWrapper>
       {user ? (
         <>
-        <Header title={"Your Profile"} subtitle={"Manage your admin account details and preferences"} />
+        <Header title="Administrator Panel" 
+       subtitle="Control menu items, monitor orders, and manage user preferences."
+         />
 
           <UserDetailsCard user={user} />
           <Container maxW="5xl" p={0}
@@ -85,7 +88,7 @@ const Profile = () => {
           <Text fontSize="xl" color="gray.500">Loading User Details...</Text>
         </Box>
       )}
-    </Box>
+  </LayoutWrapper>
   );
 };
 

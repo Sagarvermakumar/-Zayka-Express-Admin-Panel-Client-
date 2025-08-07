@@ -51,11 +51,23 @@ const GlassLayout = ({ children }) => {
       />
       <Box
         position="absolute"
-        top="20%"
+        top="10%"
         right="30%"
         w="200px"
-        h="200px"
+        h="450px"
         bg="blue"
+        borderRadius="50%"
+        filter="blur(100px)"
+        zIndex={0}
+        opacity={0.4}
+      />
+      <Box
+        position="absolute"
+        bottom="0%"
+        left="0%"
+        w="200px"
+        h="500px"
+        bg="red"
         borderRadius="50%"
         filter="blur(100px)"
         zIndex={0}
@@ -69,6 +81,7 @@ const GlassLayout = ({ children }) => {
         maxW="100vw"
         h={'100vh'}
         backdropFilter="blur(25px)"
+     
       >
         {children}
       </Container>

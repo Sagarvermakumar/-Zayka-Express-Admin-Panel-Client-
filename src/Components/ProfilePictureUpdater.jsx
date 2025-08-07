@@ -31,9 +31,7 @@ const ProfilePictureUpdater = ({ name, avatar }) => {
     const [preview, setPreview] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const dispatch = useDispatch();
-    const {  userDetails } = useSelector(state => state.user);
     const { updateAvatarLoading } = useSelector(state => state.auth);
-console.log(userDetails)
     // Trigger file input
     const handleIconClick = () => {
         inputRef.current.click();
@@ -91,7 +89,7 @@ console.log(userDetails)
 
     return (
         <Box position="relative" w="fit-content" >
-            <Avatar src={userDetails?.avatar.url || avatar } size="2xl" name={name} />
+            <Avatar src={avatar } size="2xl" name={name} />
 
             <IconButton
                 display={'flex'}

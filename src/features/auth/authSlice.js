@@ -77,9 +77,11 @@ export const updateProfileDetails = createAsyncThunk("user/update-details",(asyn
 // update avatar
 export const updateAvatar = createAsyncThunk(
   "user/update-avatar",
-  async (imgData, thunkAPI) => {
+  async ( imageFile, thunkAPI) => {
     try {
-      const { data } = await updateAvatarApi(imgData);
+
+      console.log( imageFile)
+      const { data } = await updateAvatarApi(imageFile);
 
       if (data.status) {
         toast.success("Avatar Updated");
@@ -146,8 +148,8 @@ const authSlice = createSlice({
         state.user = {
           ...state.user,
           avatar: {
-            public_id: action.payload.public_id,
-            url: action.payload.url,
+            public_id: action.payload.user.avatar.public_id,
+            url: action.payload.user.avatar.url,
           },
         };
       }
@@ -222,19 +224,26 @@ const authSlice = createSlice({
       })
       .addCase(updateAvatar.fulfilled, (state, action) => {
         state.updateAvatarLoading = false;
-        state.user = {
-          ...state.user,
-          avatar: {
-            public_id: action.payload.public_id,
-            url: action.payload.url,
-          },
+       const updatedAvatar = {
+            public_id: action.payload.user.avatar.public_id,
+            url: action.payload.user.avatar.url,
         };
+
+        // Update state.user
+        if (state.user) {
+          state.user.avatar = updatedAvatar;
+        }
+
+        // Also update userDetails if it exists
+        if (state.userDetails) {
+          state.userDetails.avatar = updatedAvatar;
+        }
         toast.success("Avatar Updated Successfully");
       })
       .addCase(updateAvatar.rejected, (state, action) => {
         state.updateAvatarLoading = false;
         state.error = action.payload;
-        toast.error("Failed to Update Avatar");
+        toast.error(action.payload);
       })
       // change password
       .addCase(changePassword.pending, (state) => {

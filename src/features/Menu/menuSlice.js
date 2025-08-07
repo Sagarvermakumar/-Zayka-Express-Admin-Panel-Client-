@@ -19,6 +19,7 @@ export const createMenuItem = createAsyncThunk(
       toast.success(res.data.message)
       return res.data;
     } catch (error) {
+      toast.error( error.response?.data.message || "Failed To Create Menu Items")
       console.error(`Failed to Create Menus Items ${error.message}`);
       return thunkAPI.rejectWithValue(
         error.response?.data.message || "Failed To Create Menu Items"
@@ -30,9 +31,9 @@ export const createMenuItem = createAsyncThunk(
 // get all menu items
 export const getAllMenuItems = createAsyncThunk(
   "/menus",
-  async (_, thunkAPI) => {
+  async (query, thunkAPI) => {
     try {
-      const res = await getAllMenuItemsApi();
+      const res = await getAllMenuItemsApi(query);
       return res.data;
     } catch (error) {
       console.error(`Failed to fetch Menus Items ${error.message}`);
@@ -103,9 +104,10 @@ export const toggleMenuItemAvailability = createAsyncThunk(
   async (menuitemId, thunkAPI) => {
     try {
       const res = await toggleMenuItemAvailabilityApi(menuitemId);
+      toast.success(res.data.message)
       return res.data;
     } catch (error) {
-      console.error(`Failed to Toggle Menu Item Availability ${error.message}`);
+      console.error(`Failed to Toggle Menu Item Availability ${error.response.data.message}`);
       return thunkAPI.rejectWithValue(
         error.response?.data.message || "Failed To Toggle Menu Item Availability"
       );
@@ -119,6 +121,8 @@ const initialState = {
   newMenuItem: null,
   itemDetails:null,
   isLoading: false,
+  isAddMenuItemLoading:false,
+  isAddingItemLoader :false,
   error: null,
 };
 
@@ -130,15 +134,15 @@ const menuItemsSlice = createSlice({
     builder
       // create a new menu item
       .addCase(createMenuItem.pending, (state) => {
-        state.isLoading = true;
+        state.isAddMenuItemLoading = true;
         state.error = null;
       })
       .addCase(createMenuItem.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isAddMenuItemLoading = false;
         state.newMenuItem = action.payload;
       })
       .addCase(createMenuItem.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isAddMenuItemLoading = false;
         state.error = action.payload;
         state.newMenuItem = null;
       }).addCase(getAllMenuItems.pending, (state) => {
@@ -204,7 +208,7 @@ const menuItemsSlice = createSlice({
       })
       .addCase(toggleMenuItemAvailability.fulfilled, (state, action) => {
         state.isLoading = false;
-        const updatedMenuItem = action.payload;
+        const updatedMenuItem = action.payload.updatedItem;
         state.menusItem = state.menusItem.map((menu) =>
           menu._id === updatedMenuItem._id ? updatedMenuItem : menu
         );

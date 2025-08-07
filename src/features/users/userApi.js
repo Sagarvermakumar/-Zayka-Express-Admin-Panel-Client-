@@ -6,7 +6,10 @@ const API = axios.create({
 });
 
 // get all users
-export const getAllUsersApi = () => API.get(`/user/all`);
+export const getAllUsersApi = (query = '') =>
+  API.get(`/user/all`, {
+    params: { query },
+  });
 
 // get user by ID
 export const getUserByIdApi = (id) => API.get(`/user/${id}`);
@@ -24,4 +27,4 @@ export const updateUserRoleApi = (id, data) => API.patch(`/user/${id}/role`, dat
 export const getAllCustomersApi = () => API.get("/user/customers");
 
 // delete user profile
-export const deleteUserProfileApi = (id) => API.delete(`/user/delete-profile/${id}`);
+export const deleteUserProfileApi = (id) => API.delete(`/user/${id}/delete-profile`);

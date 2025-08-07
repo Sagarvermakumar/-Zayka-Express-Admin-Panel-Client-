@@ -7,14 +7,16 @@ const API = axios.create({
 
 export const createMenuItemApi = (data) => API.post(`/menu-item/create`, data,{
       headers: {
-        "Content-Type": "multipart/form-data", // ✅ important!
+        "Content-Type": "multipart/form-data", 
       },
       withCredentials: true,
     });
-export const getAllMenuItemsApi = () => API.get("/menu-item/all");
+export const getAllMenuItemsApi = (query) => API.get("/menu-item/all",{
+    params: { query },
+  });
 export const editMenuItemApi = (id, data) => API.patch(`/menu-item/update/${id}`, data,{
       headers: {
-        "Content-Type": "multipart/form-data", // ✅ important!
+        "Content-Type": "multipart/form-data", 
       },
       withCredentials: true,
     });

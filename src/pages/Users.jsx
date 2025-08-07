@@ -1,58 +1,50 @@
 import {
   Box,
-  Stack,
-  Select,
-  Center,
-
+  Input,
+  SimpleGrid,
+  Stack
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { MdOpenInNew } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Header from '../Components/Heading';
+import NotFoundData from '../Components/NotFountData';
+import UserCardSkeleton from '../Components/Skeletons/UserCardSkeleton';
+import UserList from '../Components/UserList';
 import { getAllUsers } from '../features/users/userSlice';
 import LayoutWrapper from '../Layout/LayoutWrapper';
-import UserList from '../Components/UserList';
-import NotFoundData from '../Components/NotFountData';
 
 
 
 const Users = () => {
 
   const dispatch = useDispatch()
-  const { usersList } = useSelector((state) => state.user);
-  const [lastXDays, setLastXDays] = useState(null)
-
-
-
+  const { usersList, isLoadingUsers } = useSelector((state) => state.user);
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
-    dispatch(getAllUsers(lastXDays))
-  }, [dispatch, lastXDays]);
+    dispatch(getAllUsers(query))
+  }, [dispatch, query]);
 
-  console.log(lastXDays)
   const handleChange = (e) => {
     const { value } = e.target;
-    setLastXDays(value);
+    setQuery(value);
   };
+
+
   return (
-    <>
-        {usersList?.length > 0 ? (
-         
-          <LayoutWrapper>
-      <Stack mx={4} justify={'space-between'} alignItems={{ sm: "start", md: "center" }} flexDir={{ sm: 'column', md: 'row' }} >
+    <LayoutWrapper>
+      <Stack height={'160px'} justify={{ sm: "start", md: "start", lg: "space-between" }} alignItems={{ base: "start", md: "start", lg: "center" }} flexDir={{ base: 'column', md: 'column', lg: "row" }} >
 
         <Header title={"User Management"} subtitle={"View, block, or manage all registered users"} />
-        <Select
-
-          placeholder="View Added User in Last X Days"
-          _placeholder={{ bg: 'rgba(0,0,0,0.3)' }}
-          name="category"
-          value={lastXDays}
+        <Input
+          isRequired
+          placeholder="Search By name, Email or Number.."
+          type={'text'}
+          value={query}
           onChange={handleChange}
-          bg="rgba(0,0,0,0.3)"
-          width={{ base: 'full', md: 'fit-content' }}
+          bg="gray.700"
           color="white"
+          w={{ base: 'full', md: "full", lg: "220px" }}
           _focus={{
             borderColor: "red.500",
             borderWidth: "2px",
@@ -67,27 +59,34 @@ const Users = () => {
             borderColor: "red.500",
             boxShadow: "0 0 0 1px red.500",
           }}
-        >
+        />
 
-          {
 
-            [7, 30, 60, 180, 365].map(lastXDays => (
-              <option style={{ background: "rgba(0,0,0,0.3)" }} value={lastXDays} >Last {lastXDays} Days </option>
-
-            ))
-          }
-        </Select>
       </Stack>
-          <UserList usersList={usersList} />
-          </LayoutWrapper>
-        ) : (
-          <NotFoundData
-            label="User"
-            subLabel="Maybe the User was deleted or does not exist."
-          />
-        )}
-    </>
-  )
+
+      {/* 🟡 Check loading FIRST */}
+      <Box flex="1" overflowY="auto">
+        {
+          isLoadingUsers ? (
+            <SimpleGrid columns={[1, 1, 2, 3]} spacing={{ base: 8, md: 6 }} mb={8}>
+              {Array(12)
+                .fill(0)
+                .map((_, i) => (
+                  <UserCardSkeleton key={i} />
+                ))}
+            </SimpleGrid>
+          ) : usersList ? (
+            <UserList usersList={usersList} />
+          ) : (
+            <NotFoundData
+              label="User"
+              subLabel="Maybe the User was deleted or does not exist."
+            />
+          )
+        }
+      </Box>
+    </LayoutWrapper >
+  );
 }
 
 export default Users
