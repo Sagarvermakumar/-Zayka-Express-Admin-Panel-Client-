@@ -21,7 +21,7 @@ const Header = ({ title, subtitle, }) => {
       </Heading>
 
       {
-        subtitle && <Text>{subtitle}</Text>
+        subtitle && <Text my={2} >{subtitle}</Text>
       }
 
     </Flex>

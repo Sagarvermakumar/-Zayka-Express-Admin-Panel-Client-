@@ -102,7 +102,7 @@ const Login = () => {
           />
 
         </Stack>
-        <VStack spacing="4"
+        <VStack spacing="6"
           minW={'full'}
           maxW={'550px'}
         // w={'full'}
@@ -179,7 +179,7 @@ const Login = () => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Admin Secret Key </FormLabel>
+            <FormLabel> Secret Key </FormLabel>
             <InputGroup>
 
               <Input
