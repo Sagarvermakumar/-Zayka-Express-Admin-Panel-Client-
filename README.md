@@ -1,10 +1,10 @@
 # Zayka Express – Admin Panel Client
 
 **Zayka Express – Zaika Jo Dil Chhoo Jaaye**  
-This is the **Admin Dashboard** frontend for managing Zayka Express, a fast food delivery application.  
-It is built with modern tools to provide a clean, responsive, and intuitive admin interface.
+#### This is the **Admin Dashboard** frontend for managing Zayka Express, a fast food delivery application.  
+#### It is built with modern tools to provide a clean, responsive, and intuitive admin interface.
 
-> 🛑 This repository is private and intended only for internal use. Unauthorized access, modification, or redistribution of the code is strictly prohibited.
+## 🛑 This repository is private and intended only for internal use. Unauthorized access, modification, or redistribution of the code is strictly prohibited.
 
 ---
 

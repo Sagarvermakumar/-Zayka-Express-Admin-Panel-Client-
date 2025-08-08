@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Loader from "./components/Loader.jsx";
+import Loader from "./Components/Loader.jsx";
 import PageNotFound from "./Components/PageNotFound.jsx";
 import Unauthorized from "./Components/Unauthorized.jsx";
 import { fetchProfile } from "./features/auth/authSlice.js";

@@ -240,18 +240,6 @@ const Login = () => {
           </Button>
           {error && <Text color="red.300">{error}</Text>}
         </VStack>
-
-        <Box mt="4" textAlign="center">
-          <Text color="gray.200">or</Text>
-        </Box>
-        <Box />
-        <Text mt="4" color="gray.600" fontWeight={'bold'} textAlign="center">
-          Don't have an account?{" "}
-          <Button as={Link} to="/register" variant="link">
-            Register
-          </Button>
-
-        </Text>
       </Box>
 
     </Box>
