@@ -6,6 +6,11 @@
 
 ## 🛑 This repository is private and intended only for internal use. Unauthorized access, modification, or redistribution of the code is strictly prohibited.
 
+## 🚀 Live Demo
+The client-side application is deployed and accessible at the link below:
+
+🔗 **[Zayka Express Admin Panel – Live](https://zayka-express-six.vercel.app/)**
+
 ---
 
 ## 🚀 Tech Stack (Client Side)
