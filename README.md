@@ -53,7 +53,7 @@ All rights reserved © 2025 Sagar Verma. Do not copy, modify, or redistribute.**
 
 ### 🖥️ Login Page
 <p align="center">
-  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754574375/iuornactmx7g4ytkrzlm.png"/>
+  <img src="https://res.cloudinary.com/dv3gmxtuw/image/upload/v1754707303/z9efantc6nfg8fbgknim.png"/>
 </p>
 
 ---
