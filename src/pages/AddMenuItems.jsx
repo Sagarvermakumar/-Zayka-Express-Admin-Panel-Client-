@@ -129,19 +129,28 @@ const AddMenuItems = () => {
   return (
 
 
-    <Box
-      maxW="6xl"
-      p={{ base: 4, lg: 4 }}
-      mt={4}
-      mx={4}
-      overflow={'hidden'}
-    >
-      <Header title={"Add New Menu"} subtitle={"Create and upload new dishes to your restaurant menu"} />
+<Box
+  maxW={{ base: "full", md: "6xl" }}
+  w="full"
+  p={{ base: 4, lg: 6 }}
+  mt={4}
+  mx="auto"
+  bg={'blackAlpha.600'}
+  borderRadius="xl"
+  boxShadow="0 8px 32px rgba(0, 0, 0, 0.15)"
+>
+  <Header
+    title="Add New Menu"
+    subtitle="Create and upload new dishes to your restaurant menu"
+  />
 
-
-
-      <VStack spacing={6} align="stretch" as={'form'} onSubmit={handleSubmit} width={'full'}  >
-        {/* Responsive grid: 3 cols on md+ */}
+  <VStack
+    spacing={6}
+    align="stretch"
+    as="form"
+    onSubmit={handleSubmit}
+    w="full"
+  >
 
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
           {/* Image Upload */}

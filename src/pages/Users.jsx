@@ -43,6 +43,7 @@ const Users = () => {
           onChange={handleChange}
           bg="gray.800"
           color="white"
+          mb={6}
           w={{ base: 'full', md: "full", lg: "220px" }}
           _focus={{
             borderColor: "red.500",

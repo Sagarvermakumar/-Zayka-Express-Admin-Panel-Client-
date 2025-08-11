@@ -43,9 +43,9 @@ const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           {/* Public routes */}
-          <Route path="/login" element={<GlassLayout>
+          <Route path="/login" element={
             <Login />
-          </GlassLayout>} />
+          } />
 
           {/* Protected routes */}
           <Route path="/" element={<ProtectedRoute allowedRole={'Admin'}><AdminLayout /></ProtectedRoute>}>

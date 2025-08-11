@@ -31,4 +31,4 @@ export const updateAvatarApi = (avatar) => {
 
 
 // logout user
-export const logoutUserApi = () => API.get("/user/logout");
+export const logoutUserApi = () => API.post("/auth/logout");
