@@ -13,15 +13,23 @@ import { Box, Heading } from "@chakra-ui/react";
 import PropTypes from 'prop-types';
 
 const OrderStatsChart = ({ stats, title }) => {
+const newStats = stats.map(item => {
+  let status = item.status === "out_for_delivery" ? "OFD" : item.status.toUpperCase();
+  return {
+    ...item,
+    status,
+    totalPrice: Math.round(item.totalPrice)
+  };
+});
   return (
-    <Box mt={10} p={4} bg="transparent" borderRadius="lg" shadow="dark-lg">
+    <Box p={4} bg="transparent" borderRadius="lg" shadow="dark-lg">
       <Heading size="md" mb={4} color="white">
         {title}
       </Heading>
-      <ResponsiveContainer width="100%" height={500}>
+      <ResponsiveContainer width="100%" height={350}>
         <BarChart
-          data={stats}
-          margin={{ top: 20, right: 30, left: 10, bottom: 10 }}
+          data={newStats}
+          margin={{ top: 20, right: 10, left: 10, bottom: 10 }}
         >
           {/* Add Grid Lines */}
           <CartesianGrid strokeDasharray="3 3" stroke="#555" />

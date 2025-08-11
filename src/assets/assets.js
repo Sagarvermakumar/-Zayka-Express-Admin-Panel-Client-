@@ -1,22 +1,18 @@
-import {
-  FaHeadSideMask,
-  FaJediOrder,
-  FaRegUser,
-  FaWallet,
-} from "react-icons/fa";
-import { FaAsterisk, FaUserGroup } from "react-icons/fa6";
 import { FiHome } from "react-icons/fi";
 import logo from "./logo.png";
-import { MdAddReaction } from "react-icons/md";
+
+import { FaClipboardList, FaPlusCircle, FaUserCircle, FaUsers, FaUtensils } from "react-icons/fa";
 
 const adminLinkItems = [
-  { name: "Dashboard", icon: FiHome, path: "/" },
-  { name: "Users", icon: FaUserGroup, path: "/users" },
-  { name: "All Menus", icon: FaHeadSideMask, path: "/menus" },
-  { name: "Add Menu", icon: MdAddReaction, path: "/add-item" },
-  { name: "Orders", icon: FaJediOrder, path: "/orders" },
-  { name: "Profile", icon: FaRegUser, path: "/profile" },
+  { name: "Dashboard", icon: FiHome, path: "/" },                // Overview first
+  { name: "Orders", icon: FaClipboardList, path: "/orders" },    // Orders second (most frequent)
+  { name: "Menus", icon: FaUtensils, path: "/menus" },           // All menus
+  { name: "Add Menu", icon: FaPlusCircle, path: "/add-item" },   // Add new menu
+  { name: "Users", icon: FaUsers, path: "/users" },              // User management
+  { name: "Profile", icon: FaUserCircle, path: "/profile" },     // Profile last
 ];
 
 
-export { adminLinkItems,  logo };
+
+export { adminLinkItems, logo };
+

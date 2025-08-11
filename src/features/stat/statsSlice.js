@@ -4,7 +4,6 @@ import { getAllStatsApi, getOrderStatsApi } from "./statsApi";
 export const getAllStats = createAsyncThunk("/stats", async (_, thunkAPI) => {
   try {
     const res = await getAllStatsApi();
-    // console.log(res.data)
     return res.data.stats;
   } catch (error) {
     console.error(`Failed to fetch Stats ${error.message}`);
@@ -18,7 +17,6 @@ export const getAllStats = createAsyncThunk("/stats", async (_, thunkAPI) => {
 export const getOrderStats = createAsyncThunk("/stats/orders", async (_, thunkAPI) => { 
   try {
     const {data} = await getOrderStatsApi();
-    console.log("Order Stats", data);
     return data.stats;
 
   } catch (error) {

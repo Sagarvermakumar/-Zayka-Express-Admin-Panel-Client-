@@ -1,12 +1,11 @@
 // src/components/Loader.jsx
-import { Spinner, VStack, Text, Center, Box } from "@chakra-ui/react";
-import GlassLayout from "../Layout/Glass";
-import LayoutWrapper from "../Layout/LayoutWrapper";
+import { Box, Center, Spinner, Text, VStack } from "@chakra-ui/react";
+import GlassLayout from "../../Layout/Glass";
 
 const Loader = () => {
   return (
     <GlassLayout>
-      <LayoutWrapper>
+    
         <Center minH="100vh">
           <VStack spacing={6}>
             {/* Logo SVG */}
@@ -35,7 +34,7 @@ const Loader = () => {
             <Spinner size="xl" thickness="4px" color="red.500" />
           </VStack>
         </Center>
-      </LayoutWrapper>
+     
     </GlassLayout>
   );
 };

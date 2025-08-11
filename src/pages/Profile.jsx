@@ -8,11 +8,10 @@ import {
 import { FaList } from "react-icons/fa6";
 import { MdAddHome, MdLogout } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import Header from "../Components/common/Heading";
 import UserDetailsCard from "../Components/UserDetailsCard.jsx";
 import { logoutUser } from "../features/auth/authSlice";
-import Header from "../Components/Heading.jsx";
-import {useNavigate} from 'react-router-dom'
-import LayoutWrapper from "../Layout/LayoutWrapper.jsx";
 
 
 const Profile = () => {
@@ -27,20 +26,20 @@ const Profile = () => {
 
   }
   return (
-    <LayoutWrapper>
+    <>
       {user ? (
         <>
-        <Header title="Administrator Panel" 
-       subtitle="Control menu items, monitor orders, and manage user preferences."
-         />
+          <Header title="Administrator Panel"
+            subtitle="Control menu items, monitor orders, and manage user preferences."
+          />
 
           <UserDetailsCard user={user} />
-          <Container maxW="5xl" p={0}
+          <Container maxW="80vw" p={0}
 
           >
 
             <Box
-              maxW="5xl"
+              maxW="full"
               mx="auto"
 
               boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.18)"
@@ -57,7 +56,7 @@ const Profile = () => {
                   leftIcon={<MdAddHome />}
                   size="sm"
                   mt={3}
-                onClick={()=> navigate('/add-item')}
+                  onClick={() => navigate('/add-item')}
                 >
                   Create Menu
                 </Button>
@@ -65,7 +64,7 @@ const Profile = () => {
                   leftIcon={<FaList />}
                   size="sm"
                   mt={3}
-                onClick={()=> navigate('/orders')}
+                  onClick={() => navigate('/orders')}
                 >
                   View Orders
                 </Button>
@@ -88,7 +87,7 @@ const Profile = () => {
           <Text fontSize="xl" color="gray.500">Loading User Details...</Text>
         </Box>
       )}
-  </LayoutWrapper>
+    </>
   );
 };
 

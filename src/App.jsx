@@ -1,14 +1,14 @@
 import { Suspense, lazy, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Loader from "./Components/Loader.jsx";
-import PageNotFound from "./Components/PageNotFound.jsx";
-import Unauthorized from "./Components/Unauthorized.jsx";
+import Loader from "./Components/common/Loader.jsx";
+import PageNotFound from "./Components/common/PageNotFound.jsx";
+import Unauthorized from "./Components/common/Unauthorized.jsx";
 import { fetchProfile } from "./features/auth/authSlice.js";
 import GlassLayout from "./Layout/Glass.jsx";
-import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-import UserDetails from "./pages/UserDetails.jsx";
 import AddMenuItems from "./pages/AddMenuItems.jsx";
+import UserDetails from "./pages/UserDetails.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 
 
 
@@ -29,9 +29,6 @@ const AllOrders = lazy(() => import("./pages/Orders.jsx"));
 
 const App = () => {
 
-  // const user = useSelector(state=> state.user);
-
-  // console.log(user)
   const dispatch = useDispatch();
   useEffect(() => {
 

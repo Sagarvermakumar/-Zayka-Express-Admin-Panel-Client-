@@ -6,12 +6,11 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../Components/Heading';
-import NotFoundData from '../Components/NotFountData';
+import EmptyState from '../Components/common/EmptyState';
+import Header from '../Components/common/Heading';
+import UserList from '../Components/Lists/UserList';
 import UserCardSkeleton from '../Components/Skeletons/UserCardSkeleton';
-import UserList from '../Components/UserList';
 import { getAllUsers } from '../features/users/userSlice';
-import LayoutWrapper from '../Layout/LayoutWrapper';
 
 
 
@@ -32,8 +31,8 @@ const Users = () => {
 
 
   return (
-    <LayoutWrapper>
-      <Stack height={'160px'} justify={{ sm: "start", md: "start", lg: "space-between" }} alignItems={{ base: "start", md: "start", lg: "center" }} flexDir={{ base: 'column', md: 'column', lg: "row" }} >
+    <>
+      <Stack justify={{ sm: "start", md: "start", lg: "space-between" }} alignItems={{ base: "start", md: "start", lg: "center" }} flexDir={{ base: 'column', md: 'column', lg: "row" }} >
 
         <Header title={"User Management"} subtitle={"View, block, or manage all registered users"} />
         <Input
@@ -42,7 +41,7 @@ const Users = () => {
           type={'text'}
           value={query}
           onChange={handleChange}
-          bg="gray.700"
+          bg="gray.800"
           color="white"
           w={{ base: 'full', md: "full", lg: "220px" }}
           _focus={{
@@ -78,14 +77,14 @@ const Users = () => {
           ) : usersList ? (
             <UserList usersList={usersList} />
           ) : (
-            <NotFoundData
+            <EmptyState
               label="User"
               subLabel="Maybe the User was deleted or does not exist."
             />
           )
         }
       </Box>
-    </LayoutWrapper >
+    </ >
   );
 }
 

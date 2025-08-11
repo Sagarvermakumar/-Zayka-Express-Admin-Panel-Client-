@@ -1,12 +1,12 @@
 import { Badge, Box, Button, Flex, Image, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
+import { FileEdit, LucideDelete, ToggleLeft, ToggleRight } from "lucide-react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteMenuItem, toggleMenuItemAvailability } from "../features/Menu/menuSlice";
-import ToggleMenuItemAvailabilityModal from "./ToggleMenuItemAvailabilityModal";
-import { useState } from "react";
-import { DeleteIcon, Edit, Edit2Icon, EditIcon, FileEdit, LucideDelete, ToggleLeft, ToggleRight } from "lucide-react";
+import { deleteMenuItem, toggleMenuItemAvailability } from "../../features/Menu/menuSlice";
+import ToggleMenuItemAvailabilityModal from "../Modals/ToggleMenuItemAvailabilityModal";
 
-const AdminFoodItems = ({ items }) => {
+const MenuList = ({ items }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,25 +17,44 @@ const AdminFoodItems = ({ items }) => {
   const [currentAvailability, setCurrentAvailability] = useState(false)
 
 
-  const handleDeleteMenuItem = id => {
-    dispatch(deleteMenuItem(id))
+const [deletingMenuItemId, setDeletingMenuItemId] = useState(null);
+
+const handleDeleteMenuItem = async (id) => {
+  setDeletingMenuItemId(id);
+  try {
+    await dispatch(deleteMenuItem(id)).unwrap();
+  } catch (error) {
+    console.error("Failed to delete menu item:", error);
+  } finally {
+    setDeletingMenuItemId(null);
   }
-  const handleOpenToggleModal = item => {
-    console.log(item);
+};
+
+  const [togglingItemId, setTogglingItemId] = useState(null);
+
+  const handleOpenToggleModal = (item) => {
     setMenuitemId(item._id);
-    setCurrentAvailability(item.isAvailable)
-    onOpen()
-  }
-  const handleToggleMenuItemAvailability = id => {
-    dispatch(toggleMenuItemAvailability(menuitemId, currentAvailability))
-    console.log(id)
-  }
+    setCurrentAvailability(item.isAvailable);
+    onOpen();
+  };
+
+  const handleToggleMenuItemAvailability = async () => {
+    setTogglingItemId(menuitemId);
+    try {
+      await dispatch(toggleMenuItemAvailability(menuitemId, currentAvailability)).unwrap();
+    } catch (error) {
+      console.error("Failed to toggle item availability:", error);
+    } finally {
+      setTogglingItemId(null);
+    }
+  };
+
 
 
   return (
 
 
-    <SimpleGrid columns={{ base: 1, sm: 2, md: 2,lg:3 }} columnGap={12} rowGap={8}  > 
+    <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 3 }} columnGap={8} rowGap={8}  >
       {items.map((item) => (
         <Box
           key={item._id}
@@ -43,7 +62,7 @@ const AdminFoodItems = ({ items }) => {
           borderRadius="lg"
           overflow="hidden"
           boxShadow="lg"
-          bg="whiteAlpha.100"
+          bg="blackAlpha.300"
           p={4}
 
         >
@@ -75,7 +94,7 @@ const AdminFoodItems = ({ items }) => {
             )}
           </Flex>
 
-          <Flex justify="start" gap={3} mt={4} flexDirection={{sm:"column",md:"column", lg:"row"}} >
+          <Flex justify="start" gap={3} mt={4} flexDirection={{ sm: "column", md: "column", lg: "row" }} >
             <Button
               size="sm"
               px={4}
@@ -89,32 +108,37 @@ const AdminFoodItems = ({ items }) => {
             </Button>
 
             <Button
-            leftIcon={<LucideDelete size={'20px'} />}
+              onClick={() => handleDeleteMenuItem(item._id)}
+              leftIcon={<LucideDelete size={'20px'} />}
               size="sm"
               px={4}
               bg="red.700"
               color="white"
+              isLoading={deletingMenuItemId === item._id}
+              loadingText="Deleting..."
               _hover={{ bg: "red.600" }}
-              onClick={() => handleDeleteMenuItem(item._id)}
             >
               Delete
             </Button>
 
             <Button
-              leftIcon={item.isAvailable ? <ToggleRight size={'22px'}  /> : <ToggleLeft size={'22px'}  />}
+              leftIcon={item.isAvailable ? <ToggleRight size={'22px'} /> : <ToggleLeft size={'22px'} />}
               size="sm"
               px={4}
-              bg="transparent"
+
+              color="#fff"
+              bg={ item.isAvailable ? "red.500" : "green"}
               border="1px solid"
-              borderColor="red.500"
-              color="red.500"
+              borderColor={item.isAvailable ? "red.400" : "darkgreen"}
+              isLoading={togglingItemId === item._id}
+              loadingText={item.isAvailable ? "Disabling..." : "Enabling..."}
               _hover={{
-                bg: "red.500",
+                bg: item.isAvailable ? "red.600" : "darkgreen",
                 color: "white",
               }}
               onClick={() => handleOpenToggleModal(item)}
             >
-              Toggle Availability
+            {  item.isAvailable ? "Available":"Unavailable"}
             </Button>
           </Flex>
 
@@ -137,4 +161,5 @@ const AdminFoodItems = ({ items }) => {
   );
 };
 
-export default AdminFoodItems;
+
+export default MenuList

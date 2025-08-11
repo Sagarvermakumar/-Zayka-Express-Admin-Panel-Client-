@@ -14,14 +14,14 @@ import PropTypes from 'prop-types';
 
 const GrowthChart = ({ title, data, dataKey }) => { 
   return (
-    <Box mt={10} p={4} bg="transparent" borderRadius="lg" shadow="dark-lg">
+    <Box  p={4} bg="transparent" borderRadius="lg" shadow="dark-lg">
       <Heading size="md" mb={4} color="#fff">
         {title}
       </Heading>
-      <ResponsiveContainer width="100%" height={500}>
+      <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 10, bottom: 10 }}
+          margin={{ top: 20, right: 10, left: 10, bottom: 10 }}
         >
           {/* Grid lines */}
           <CartesianGrid strokeDasharray="3 3" stroke="#555" />

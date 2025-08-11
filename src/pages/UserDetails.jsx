@@ -1,26 +1,25 @@
-import { Box, Button, Container, Stack } from '@chakra-ui/react';
-import { Undo } from 'lucide-react';
+import { Box,Stack,Button } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 import { MdBlockFlipped } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import NotFoundData from '../Components/NotFountData';
+import EmptyState from '../Components/common/EmptyState';
 import UserDetailsCardSkeleton from '../Components/Skeletons/UserDetailsCardSkeleton';
 import UserDetailsCard from '../Components/UserDetailsCard';
 import { blockUser, getUserById, unblockUser } from '../features/users/userSlice';
-import LayoutWrapper from '../Layout/LayoutWrapper';
-
+import { Undo } from 'lucide-react';
 const UserDetails = () => {
-
     const dispatch = useDispatch();
     const { id } = useParams();
-    const { userDetails, isLoading, isLoadingChangeUserStatus } = useSelector((state) => state.user);
 
     useEffect(() => {
-        dispatch(getUserById(id))
-    }, [dispatch, id])
+        dispatch(getUserById(id));
+    }, [dispatch, id]);
+
+    const { userDetails, isLoading, isLoadingChangeUserStatus } = useSelector((state) => state.user);
+
 
     const openInGoogleMaps = () => {
         if (userDetails.address && userDetails.address.length > 0) {
@@ -28,80 +27,77 @@ const UserDetails = () => {
             const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
             window.open(url, '_blank');
         } else {
-            toast.error("No address found for this user.");
+            toast.error('No address found for this user.');
         }
     };
-
 
     const handdleBlockUser = () => {
         if (userDetails.status === 'active') {
-            // Call block user API
             dispatch(blockUser(userDetails._id));
         } else {
-            // Call unblock user API
             dispatch(unblockUser(userDetails._id));
-        }
 
+        }
     };
 
-
     return (
-        <LayoutWrapper  >
-
-            {
-                isLoading ? <UserDetailsCardSkeleton /> : (<>
+        <>
+            {isLoading ? (
+                <UserDetailsCardSkeleton />
+            ) : (
+                <>
                     {userDetails ? (
                         <>
-                            <UserDetailsCard user={userDetails} />
-                            <Container maxW="5xl" p={0}
-                            >
+                            <Box p={0}>
+                                {/* User Details Card */}
+                                <UserDetailsCard user={userDetails} />
 
+                                {/* Buttons Box */}
                                 <Box
-                                    maxW="5xl"
-                                    mx="auto"
-                                    boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.18)"
-                                    border={'1px solid'}
-                                    borderColor={'rgba(31, 38, 135, 0.18)'}
-                                    p={{ base: 2, lg: 4 }}
+                                    w="100%"
+                                    mt={4}
+                                    p={{ base: 4, lg: 6 }}
                                     bg="rgba(22, 8, 8, 0.25)"
                                 >
-                                    <Stack spacing={3} flexDir={{ base: "column", lg: "row" }} >
-
+                                    <Stack
+                                        spacing={3}
+                                        direction={{ base: 'column', md: 'row' }}
+                                        justify={{ base: 'center', md: 'flex-start' }}
+                                        align="center"
+                                    >
                                         <Button
                                             leftIcon={<FaMapMarkedAlt />}
                                             colorScheme="blue"
                                             size="sm"
-                                            mt={3}
                                             onClick={openInGoogleMaps}
                                         >
                                             Open Location in Map
                                         </Button>
                                         <Button
-                                            leftIcon={userDetails.status === 'active' ? <MdBlockFlipped /> : <Undo />}
+                                            leftIcon={
+                                                userDetails?.status === 'active' ? <MdBlockFlipped /> : <Undo />
+                                            }
                                             size="sm"
                                             isLoading={isLoadingChangeUserStatus}
-                                            // loadingText
-                                            mt={3}
                                             onClick={handdleBlockUser}
                                         >
-                                            {userDetails.status === 'active' ? 'Block' : 'Unblock'} User
+                                            {userDetails?.status === 'active' ? 'Block' : 'Unblock'} User
                                         </Button>
-                                 
                                     </Stack>
                                 </Box>
-                            </Container>
+                            </Box>
 
                         </>
                     ) : (
-                        <NotFoundData
+                        <EmptyState
                             label="User"
                             subLabel="Maybe the User was deleted or does not exist."
                         />
                     )}
-                </>)
-            }
-        </LayoutWrapper>
+                </>
+            )}
+        </>
     );
-}
+};
 
-export default UserDetails
+export default UserDetails;

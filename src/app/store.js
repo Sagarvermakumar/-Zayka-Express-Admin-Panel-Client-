@@ -12,10 +12,10 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "../features/auth/authSlice";
-import userReducer from "../features/users/userSlice";
 import menuItemsReducer from "../features/Menu/menuSlice";
 import ordersReducer from "../features/orders/orderSlice";
-import statsReducer from '../features/stat/statsSlice'
+import statsReducer from '../features/stat/statsSlice';
+import userReducer from "../features/users/userSlice";
 
 
 

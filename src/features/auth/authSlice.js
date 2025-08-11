@@ -35,7 +35,11 @@ export const fetchProfile = createAsyncThunk(
       const response = await getProfileApi();
       return response.data.user;
     } catch (error) {
-      console.error("Error fetching profile:", error);
+         if (!navigator.onLine) {
+        return thunkAPI.rejectWithValue(
+          "Unable to connect. Please check your internet connection."
+        );
+      }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to fetch profile"
       );
@@ -51,7 +55,6 @@ export const logoutUser = createAsyncThunk(
       const response = await logoutUserApi();
       return response.data;
     } catch (error) {
-      console.error("Error logging out:", error);
       toast.error( error.response?.data?.message || "Logout failed")
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Logout failed"
@@ -80,7 +83,6 @@ export const updateAvatar = createAsyncThunk(
   async ( imageFile, thunkAPI) => {
     try {
 
-      console.log( imageFile)
       const { data } = await updateAvatarApi(imageFile);
 
       if (data.status) {

@@ -6,82 +6,89 @@ const GlassLayout = ({ children }) => {
   return (
     <Box
       position="relative"
-      minH="100vh"
       bg="transparent"
-      overflowX="hidden"
-
-
+      overflow="hidden"
+      w="100%"
+      h="100%"
+    
     >
       {/* Blurred colored shapes */}
       <Box
         position="absolute"
-        top="-50px"
-        left="-50px"
-        w="300px"
-        h="300px"
-        bg="#ff0080"
+        top="-100px"
+        left="20%"
+        w="250px"
+        h="250px"
+        bg="indigo"
         borderRadius="50%"
         filter="blur(120px)"
         zIndex={0}
-        opacity={0.6}
+        opacity={0.5}
       />
+
       <Box
         position="absolute"
-        bottom="100px"
-        right="-60px"
-        w="300px"
+        bottom="10%"
+        right="-80px"
+        w="280px"
         h="200px"
         bg="#f80"
         borderRadius="30px"
         filter="blur(100px)"
         zIndex={0}
-        opacity={0.5}
+        opacity={0.4}
       />
+
       <Box
         position="absolute"
-        top="100px"
+        top="15%"
         right="-60px"
-        w="300px"
+        w="250px"
         h="200px"
-        bg="#311832"
+        bg="#00f0ff"
         borderRadius="30px"
         filter="blur(100px)"
         zIndex={0}
-        opacity={0.5}
+        opacity={0.3}
       />
+
       <Box
         position="absolute"
-        top="10%"
+        top="20%"
         right="30%"
         w="200px"
-        h="450px"
+        h="200px"
         bg="blue"
         borderRadius="50%"
-        filter="blur(100px)"
+        filter="blur(110px)"
         zIndex={0}
-        opacity={0.4}
+        opacity={0.5}
       />
+
       <Box
         position="absolute"
-        bottom="0%"
+        bottom="-60px"
         left="0%"
         w="200px"
-        h="500px"
-        bg="red"
+        h="250px"
+        bg="#ff6b6b"
         borderRadius="50%"
         filter="blur(100px)"
         zIndex={0}
-        opacity={0.5}
+        opacity={0.35}
       />
 
       {/* Glass container */}
       <Container
         p={0}
+        m={0}
         zIndex={1}
-        maxW="100vw"
-        h={'100vh'}
+        maxW="100%"
+        h="100%"
         backdropFilter="blur(25px)"
-     
+        bg={'transparent'}
+        
+    
       >
         {children}
       </Container>

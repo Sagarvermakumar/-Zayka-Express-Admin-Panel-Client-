@@ -24,9 +24,10 @@ export default function Sidebar({ children }) {
 
   return (
     <Box minH="100vh" bg="transparent"
-   
+      minW={'full'}
+      overflowY={'hidden'}
     >
-       <Box
+      <Box
         position="absolute"
         bottom="0%"
         left="0%"
@@ -38,7 +39,7 @@ export default function Sidebar({ children }) {
         zIndex={0}
         opacity={0.3}
       />
-  
+
       {/* Fixed Sidebar for Desktop */}
       <SidebarContent
         onClose={onClose}
@@ -61,10 +62,13 @@ export default function Sidebar({ children }) {
 
       {/* Main Content */}
       <Box
-        ml={{ base: 0, md: 80 }} // match Sidebar width
+        flex="1" height="100%" overflowY="scroll"
+        ml={{ base: 0, md: 64 }} // match Sidebar width
         p={{ base: 2, md: 4 }}
+        mb={4}
+
       >
-        {children || <Outlet />}
+        {children}
       </Box>
     </Box>
   )
@@ -88,7 +92,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       bg="#09090965"
       borderRight="1px"
       borderRightColor="gray.700"
-      w={{ base: 'full', md: 80 }}
+      w={{ base: 'full', md: 64 }}
       pos="fixed"
       left="0"
       top="0"
@@ -181,7 +185,7 @@ const NavItem = ({ icon, children, path, isActive, pl = '4', ...rest }) => {
         fontFamily="monospace"
         fontSize="2xl"
         borderRadius="md"
-        color={isActive ? '#f80' : 'gray.100'}
+        color={isActive ? '#f64' : 'gray.100'}
         bg={isActive ? 'rgba(0,0,0,0.4)' : 'transparent'}
         _hover={{
           color: '#ffffff',
@@ -211,7 +215,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
   const { user } = useSelector((state) => state.auth)
   return (
     <Flex
-      ml={{ base: 0, md: 80 }}
+      ml={{ base: 0, md: 64 }}
       px={{ base: 4, md: 6 }}
       height="20"
       alignItems="center"

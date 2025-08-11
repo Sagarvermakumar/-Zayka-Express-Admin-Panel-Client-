@@ -8,45 +8,45 @@ import {
   Tooltip,
   useDisclosure
 } from '@chakra-ui/react'
+import { useState } from 'react'
 import { toast } from "react-hot-toast"
 import { MdDeleteForever, MdEditDocument, MdOpenInNew } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import DeleteUserProfileModal from './DeleteUserProfileModal'
-import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteUserProfile } from '../features/users/userSlice'
+import { Link } from 'react-router-dom'
+import { deleteUserProfile } from '../../features/users/userSlice'
+import DeleteUserProfileModal from '../Modals/DeleteUserProfileModal'
 
 const UserList = ({ usersList }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null)
   const handleRoleUpdate = () => {
     toast.error("⚠️ Role edit feature is currently unavailable. ")
   }
-  const handleOpenDeleteModal = userDetails =>{
+  const handleOpenDeleteModal = userDetails => {
     setUser(userDetails)
     onOpen()
   }
-console.log(user)
-  const handleDeleteProfile = () =>{
+  const handleDeleteProfile = () => {
     dispatch(deleteUserProfile(user._id))
 
   }
   return (
-    <SimpleGrid columns={[1, 1, 2,3]} spacing={{ base: 8, md: 6 }} mb={8}>
+    <SimpleGrid columns={[1, 1, 2, 3]} spacing={{ base: 6, md: 8 }} mb={8}>
       {usersList.map((user) => (
 
         <Box
           key={user._id}
-          bg={'#0101017d'}
-          p={4}
+          bg="blackAlpha.300"
+          p={6}
+
           borderLeft="4px solid"
           borderTopLeftRadius={'base'}
           borderBottomLeftRadius={'base'}
           borderColor={user.role === 'Admin' ? '#f80' : '#ff0080'}
         >
-          <Flex justify="space-between" align="center" mb={2}>
+          <Flex justify="space-between" align="center" mb={1}>
             <Text fontWeight="bold" fontSize="lg">
               {user.name}
             </Text>
@@ -61,13 +61,13 @@ console.log(user)
                   aria-label="Edit Role"
                 />
               </Tooltip>
-               <Tooltip label={`${user?.name}'s Delete Profile`}>
+              <Tooltip label={`${user?.name}'s Delete Profile`}>
                 <IconButton
                   icon={<MdDeleteForever size={'18px'} />}
                   size="sm"
                   variant="ghost"
                   colorScheme="blue"
-                  onClick={()=>handleOpenDeleteModal(user)}
+                  onClick={() => handleOpenDeleteModal(user)}
                   aria-label="Edit Role"
                 />
               </Tooltip>
@@ -106,14 +106,14 @@ console.log(user)
         </Box>
 
       ))}
-          {user && (
-              <DeleteUserProfileModal
-                isOpen={isOpen}
-                onClose={onClose}
-                onDelete={handleDeleteProfile}
-                userName={user.name}
-              />
-            )}
+      {user && (
+        <DeleteUserProfileModal
+          isOpen={isOpen}
+          onClose={onClose}
+          onDelete={handleDeleteProfile}
+          userName={user.name}
+        />
+      )}
     </SimpleGrid>
   )
 }

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { blockUserApi, deleteUserProfileApi, getAllUsersApi, getUserByIdApi, unblockUserApi, updateUserRoleApi } from "./userApi";
 import toast from "react-hot-toast";
+import { blockUserApi, deleteUserProfileApi, getAllUsersApi, getUserByIdApi, unblockUserApi, updateUserRoleApi } from "./userApi";
 
 //get all users
 export  const getAllUsers = createAsyncThunk("user/user-list",
@@ -23,7 +23,6 @@ export const getUserById =  createAsyncThunk("user/details",
   async(id,thunkAPI)=>{
     try {
       const { data } = await getUserByIdApi(id);
-     console.log("User Details Data", data);
       return data;
     } catch (error) {
       console.error("Error fetching user details  :", error);
@@ -39,7 +38,6 @@ export const getUserById =  createAsyncThunk("user/details",
 export const blockUser = createAsyncThunk("user/block",
   async (id, thunkAPI) => {
     try {
-      console.log("Blocking user with ID:", id);
       // Call the block user API
       const { data } = await blockUserApi(id);
       if (data.status) {
@@ -138,7 +136,6 @@ const userSlice = createSlice({
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isLoadingUsers = false;
         state.error = action.payload;
-        toast.error("Failed to Fetch All Users");
       })
       // get user by ID
       .addCase(getUserById.pending, (state) => {
@@ -161,7 +158,6 @@ const userSlice = createSlice({
       })
       .addCase(blockUser.fulfilled, (state, action) => {
         state.isLoadingChangeUserStatus = false;
-        console.log(action.payload.user)
     
          state.userDetails = {
     ...state.userDetails, // keep old info

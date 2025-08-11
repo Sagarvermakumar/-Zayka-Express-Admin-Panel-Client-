@@ -1,8 +1,7 @@
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { FaMedal } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LayoutWrapper from '../Layout/LayoutWrapper';
+import { useNavigate } from 'react-router-dom';
 
 const PageNotFound = () => {
     const navigate = useNavigate()
@@ -19,7 +18,6 @@ const PageNotFound = () => {
     };
 
     return (
-        <LayoutWrapper>
             <Box w={'full'} h={'full'} display={'flex'} justifyContent={'center'} alignItems={'center'} >
                 <VStack
                     spacing={8}
@@ -60,7 +58,6 @@ const PageNotFound = () => {
                     </Button>
                 </VStack>
             </Box>
-        </LayoutWrapper>
     );
 };
 

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 import {
   createMenuItemApi,
   deleteMenuItemApi,
@@ -7,7 +8,6 @@ import {
   getMenuItemByIdApi,
   toggleMenuItemAvailabilityApi
 } from "./menuApi";
-import toast from "react-hot-toast";
 
 // create a new menu item
 export const createMenuItem = createAsyncThunk(
@@ -15,7 +15,6 @@ export const createMenuItem = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await createMenuItemApi(data);
-      console.log(' Res of Creating Menu : ', res)
       toast.success(res.data.message)
       return res.data;
     } catch (error) {
@@ -121,7 +120,7 @@ const initialState = {
   newMenuItem: null,
   itemDetails:null,
   isLoading: false,
-  isAddMenuItemLoading:false,
+  isGettingItemLoader:false,
   isAddingItemLoader :false,
   error: null,
 };
@@ -134,26 +133,26 @@ const menuItemsSlice = createSlice({
     builder
       // create a new menu item
       .addCase(createMenuItem.pending, (state) => {
-        state.isAddMenuItemLoading = true;
+        state.isAddingItemLoader = true;
         state.error = null;
       })
       .addCase(createMenuItem.fulfilled, (state, action) => {
-        state.isAddMenuItemLoading = false;
+        state.isAddingItemLoader = false;
         state.newMenuItem = action.payload;
       })
       .addCase(createMenuItem.rejected, (state, action) => {
-        state.isAddMenuItemLoading = false;
+        state.isAddingItemLoader = false;
         state.error = action.payload;
         state.newMenuItem = null;
       }).addCase(getAllMenuItems.pending, (state) => {
-        state.isLoading = true;
+        state.isGettingItemLoader = true;
       })
       .addCase(getAllMenuItems.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isGettingItemLoader = false;
         state.menusItem = action.payload.menuItems;
       })
       .addCase(getAllMenuItems.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isGettingItemLoader = false;
         state.error = action.payload;
       })
       // edit menu item

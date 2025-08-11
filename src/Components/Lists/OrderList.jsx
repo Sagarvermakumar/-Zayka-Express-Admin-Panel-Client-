@@ -1,27 +1,43 @@
 import { Badge, Box, Button, Divider, Flex, Image, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteCancelledOrder, updateOrderStatus } from "../features/orders/orderSlice";
-import UpdateOrderStatusDialog from "./UpdateOrderStatusDialog";
-import UserContact from "./UserContact";
+import { deleteCancelledOrder, updateOrderStatus } from "../../features/orders/orderSlice";
+import UpdateOrderStatusDialog from "../Modals/UpdateOrderStatusDialog";
+import UserContact from "../UserContact";
 
 
-const Orders = ({ items }) => {
+const OrderList = ({ items }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch()
   const [selectedOrder, setSelectedOrder] = useState(null);
-
+  const [updatingOrderId, setUpdatingOrderId] = useState(null);
   const handleUpdateStatus = (order) => {
     setSelectedOrder(order);
     onOpen()
   }
-  const handleDeleteOrder = id => {
-    dispatch(deleteCancelledOrder(id))
-  }
+  const [deletingOrderId, setDeletingOrderId] = useState(null);
 
-  const handleStatusUpdate = (newStatus) => {
+  const handleDeleteOrder = async (id) => {
+    setDeletingOrderId(id);
+    try {
+      await dispatch(deleteCancelledOrder(id)).unwrap();
+    } catch (error) {
+      console.error("Failed to delete order:", error);
+    } finally {
+      setDeletingOrderId(null);
+    }
+  };
 
-    dispatch(updateOrderStatus({ id: selectedOrder._id, status: newStatus }));
+  const handleStatusUpdate = async (newStatus) => {
+    try {
+      setUpdatingOrderId(selectedOrder._id)
+      await dispatch(updateOrderStatus({ id: selectedOrder._id, status: newStatus })).unwrap()
+    } catch (error) {
+      console.error("Failed to update order:", error);
+    } finally {
+      setUpdatingOrderId(null); // update complete → loader stop
+    }
+
   };
   return (
 
@@ -34,15 +50,15 @@ const Orders = ({ items }) => {
           p={5}
           boxShadow="lg"
           bg="whiteAlpha.100"
-      display="flex"
-      flexDirection="column"
-      justifyContent="space-between"
-      minHeight="550px" 
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          minHeight="550px"
         >
           {/* User Info */}
           <Text fontSize="lg" fontWeight="bold">👤 {order.userID?.name}</Text>
           {/* <Text fontSize="sm" color="gray.300">📞 {order.userID?.phoneNumber}</Text> */}
-          <UserContact phoneNumber={order.userID?.phoneNumber}/>
+          <UserContact phoneNumber={order.userID?.phoneNumber} />
 
           {/* Address */}
           <Box mt={2}>
@@ -102,6 +118,8 @@ const Orders = ({ items }) => {
             <Button
               size="sm"
               colorScheme="teal"
+              isLoading={updatingOrderId === order._id}
+              loadingText="Updating..."
               onClick={() => handleUpdateStatus(order)}
             >
               Update Status
@@ -110,6 +128,8 @@ const Orders = ({ items }) => {
               size="sm"
               colorScheme="red"
               onClick={() => handleDeleteOrder(order._id)}
+              isLoading={deletingOrderId === order._id}
+              loadingText="Deleting..."
             >
               Delete Order
             </Button>
@@ -133,4 +153,5 @@ const Orders = ({ items }) => {
 
 
 
-export default Orders
+
+export default OrderList

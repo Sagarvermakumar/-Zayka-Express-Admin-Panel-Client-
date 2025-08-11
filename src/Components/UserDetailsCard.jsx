@@ -1,30 +1,29 @@
 'use client';
 import {
-
+    Avatar,
     Badge,
     Box,
+    Container,
     Divider,
     Flex,
-    Stack,
-    Text,
-    Container,
     HStack,
-    Avatar
+    Stack,
+    Text
 } from '@chakra-ui/react';
+
 import ProfilePictureUpdater from './ProfilePictureUpdater';
 import UserContact from './UserContact';
-
 const UserDetailsCard = ({ user }) => {
+   
 
-    console.log(user)
 
 
     return (
-        <Container maxW="5xl" p={0}
+        <Container minW="80vw" p={0}
         >
 
             <Box
-                maxW="5xl"
+                minW="100%"
                 mx="auto"
                 boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.18)"
                 border={'1px solid'}
@@ -39,7 +38,7 @@ const UserDetailsCard = ({ user }) => {
                     <Box>
                         <Text fontSize="2xl" fontWeight="bold">{user.name}</Text>
                         <Text color="gray.500" fontSize="sm">{user.email}</Text>
-                             <UserContact phoneNumber={user.phoneNumber} />
+                        <UserContact phoneNumber={user.phoneNumber} />
 
                     </Box>
                 </Flex>
@@ -101,7 +100,7 @@ const UserDetailsCard = ({ user }) => {
                     )}
                 </Box>
 
-
+              
 
             </Box>
         </Container>

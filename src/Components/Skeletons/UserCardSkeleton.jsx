@@ -6,9 +6,9 @@ const UserCardSkeleton = () => {
       w="full"
       bg="blackAlpha.800"
       borderRadius="md"
-      p={4}
+      p={6}
       borderLeft="6px solid"
-      borderColor="orange.500"
+      borderColor="#ff0080"
       boxShadow="md"
     >
       <HStack spacing={4} align="start">

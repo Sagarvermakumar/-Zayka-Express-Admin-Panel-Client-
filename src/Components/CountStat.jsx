@@ -4,12 +4,9 @@ import PropTypes from "prop-types";
 const CountStat = ({ count, label, growth }) => {
     return (
         <Stat p={4}  
-        // bg={'rgba(0, 0, 0, 0.25)'}
             borderRadius="lg"
-            shadow="lg"
-            border="1px solid rgba(239, 232, 235, 0.44)"
-          
-
+            boxShadow={'dark-lg'}
+            border="1px solid rgba(239, 232, 235, 0.04)"
         >
             <HStack justify={'space-between'} >
                 <StatLabel  >{label}</StatLabel>

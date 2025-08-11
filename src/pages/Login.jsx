@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaUserLock } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "../Components/Heading";
+import { useNavigate } from "react-router-dom";
+import Header from "../Components/common/Heading";
 import { loginAdmin } from "../features/auth/authSlice";
 
 const Login = () => {
@@ -56,34 +56,12 @@ const Login = () => {
 
   return (
 
-    <Box
-      minH="full"
-      height={'100vh'}
-      mx={1}
-      p={1}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      flexDir={"column"}
-      overflow={'hidden'}
-      pos={'relative'}
-
-
-
-
-    >
       <Box
 
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        flexDir={"column"}
-        p={8}
-        bg={'transparent'}
-        // mx={4}
-        bgGradient={'linear(145deg, #13131333, #10101029)'}
-        boxShadow={" 5px 5px 9px #0a0a0a,      -5px -5px 9px #1a1a1a"}
+        maxW={'3xl'}
+        boxShadow={'dark-lg'}
         borderRadius={"8px"}
+        p={8}
 
       >
         <Stack display={'flex'} >
@@ -242,7 +220,6 @@ const Login = () => {
         </VStack>
       </Box>
 
-    </Box>
   );
 };
 

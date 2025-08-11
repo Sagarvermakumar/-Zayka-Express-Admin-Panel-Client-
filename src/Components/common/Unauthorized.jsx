@@ -1,10 +1,8 @@
-import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
-import { FaMedal } from 'react-icons/fa';
+import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { MdOutlineErrorOutline } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import GlassLayout from '../Layout/Glass';
-import { MdError, MdErrorOutline, MdOutlineErrorOutline, MdRemoveRedEye, MdReport } from 'react-icons/md';
-import LayoutWrapper from '../Layout/LayoutWrapper';
+import GlassLayout from '../../Layout/Glass';
 
 const Unauthorized = () => {
     const navigate = useNavigate()

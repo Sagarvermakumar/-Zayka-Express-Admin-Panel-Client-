@@ -1,16 +1,16 @@
 // components/UpdateOrderStatusDialog.jsx
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
 } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const statusOptions = [
   'pending',
@@ -23,7 +23,6 @@ const statusOptions = [
 
 const UpdateOrderStatusDialog = ({ isOpen, onClose, currentStatus, onUpdate }) => {
   const [selectedStatus, setSelectedStatus] = useState(currentStatus || '');
-  console.log(selectedStatus)
   useEffect(() => {
     setSelectedStatus(currentStatus);
   }, [currentStatus]);
@@ -36,14 +35,14 @@ const UpdateOrderStatusDialog = ({ isOpen, onClose, currentStatus, onUpdate }) =
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay backdropFilter="blur(8px)" />
-      <ModalContent
-        bg="transparent"
-        color="white" p={4}
-        backdropFilter="blur(4px)"
-        boxShadow="0 0 20px 4px rgba(255, 255, 255, 0.2)"
-        border="1px solid rgba(255, 255, 255, 0.1)" >
+  <Modal isOpen={isOpen} onClose={onClose} isCentered>
+            <ModalOverlay backdropFilter="blur(5px)" />
+            <ModalContent
+                bg="transparent"
+                color="white" p={4}
+                backdropFilter="blur(4px)"
+                boxShadow="0 0 20px 4px rgba(255, 255, 255, 0.2)"
+                border="1px solid rgba(255, 255, 255, 0.1)" >
         <ModalHeader>Update Order Status</ModalHeader>
         <ModalCloseButton />
         <ModalBody px={6} py={8} >
