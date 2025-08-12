@@ -33,7 +33,7 @@ const UserList = ({ usersList }) => {
 
   }
   return (
-    <SimpleGrid columns={[1, 1, 2, 3]} spacing={{ base: 6, md: 8 }} mb={8}>
+    <SimpleGrid  columns={[1, 1, 2, 3]} spacing={{ base: 6, md: 8 }} mb={8}>
       {usersList.map((user) => (
 
         <Box
@@ -45,6 +45,7 @@ const UserList = ({ usersList }) => {
           borderTopLeftRadius={'base'}
           borderBottomLeftRadius={'base'}
           borderColor={user.role === 'Admin' ? '#f80' : '#ff0080'}
+          boxShadow={'dark-lg'}
         >
           <Flex justify="space-between" align="center" mb={1}>
             <Text fontWeight="bold" fontSize="lg">

@@ -138,7 +138,7 @@ const handleDeleteMenuItem = async (id) => {
               }}
               onClick={() => handleOpenToggleModal(item)}
             >
-            {  item.isAvailable ? "Available":"Unavailable"}
+            {  !item.isAvailable ? "Available":"Unavailable"}
             </Button>
           </Flex>
 

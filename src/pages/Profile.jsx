@@ -26,7 +26,8 @@ const Profile = () => {
 
   }
   return (
-    <>
+    <Box
+    >
       {user ? (
         <>
           <Header title="Administrator Panel"
@@ -34,19 +35,14 @@ const Profile = () => {
           />
 
           <UserDetailsCard user={user} />
-          <Container maxW="80vw" p={0}
-
-          >
 
             <Box
               maxW="full"
               mx="auto"
-
-              boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.18)"
-              border={'1px solid'}
-              borderColor={'rgba(31, 38, 135, 0.18)'}
+              mb={8}
               p={{ base: 2, lg: 4 }}
               bg="rgba(22, 8, 8, 0.25)"
+              boxShadow={'dark-lg'}
             >
 
               <Stack spacing={3} flexDir={{ base: "column", lg: "row" }} mb={{ sm: 4, md: 0 }} >
@@ -79,7 +75,6 @@ const Profile = () => {
                 </Button>
               </Stack>
             </Box>
-          </Container>
 
         </>
       ) : (
@@ -87,7 +82,7 @@ const Profile = () => {
           <Text fontSize="xl" color="gray.500">Loading User Details...</Text>
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

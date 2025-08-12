@@ -31,8 +31,8 @@ const Users = () => {
 
 
   return (
-    <>
-      <Stack justify={{ sm: "start", md: "start", lg: "space-between" }} alignItems={{ base: "start", md: "start", lg: "center" }} flexDir={{ base: 'column', md: 'column', lg: "row" }} >
+    <Box p={0} >
+      <Stack  justify={{ sm: "start", md: "start", lg: "space-between" }} alignItems={{ base: "start", md: "start", lg: "center" }} flexDir={{ base: 'column', md: 'column', lg: "row" }} >
 
         <Header title={"User Management"} subtitle={"View, block, or manage all registered users"} />
         <Input
@@ -68,7 +68,7 @@ const Users = () => {
       <Box flex="1" overflowY="auto">
         {
           isLoadingUsers ? (
-            <SimpleGrid columns={[1, 1, 2, 3]} spacing={{ base: 8, md: 6 }} mb={8}>
+            <SimpleGrid columns={[1, 1, 2, 3]} spacing={{ base: 8, md: 6 }}  >
               {Array(12)
                 .fill(0)
                 .map((_, i) => (
@@ -85,7 +85,7 @@ const Users = () => {
           )
         }
       </Box>
-    </ >
+    </Box >
   );
 }
 

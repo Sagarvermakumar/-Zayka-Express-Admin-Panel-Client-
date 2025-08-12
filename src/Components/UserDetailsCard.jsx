@@ -19,17 +19,15 @@ const UserDetailsCard = ({ user }) => {
 
 
     return (
-        <Container minW="80vw" p={0}
-        >
+     
 
             <Box
-                minW="100%"
+                w="100%"
                 mx="auto"
-                boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.18)"
-                border={'1px solid'}
-                borderColor={'rgba(31, 38, 135, 0.18)'}
+                borderColor={'rgba(193, 109, 24, 0.18)'}
                 p={{ base: 6, lg: 8 }}
                 bg="rgba(22, 8, 8, 0.25)"
+                boxShadow={'dark-lg'}
             >
                 <Flex direction={["column", "row"]} alignItems="center" mb={6} gap={4}>
                     {
@@ -73,7 +71,7 @@ const UserDetailsCard = ({ user }) => {
 
                     {user.address && user.address.length > 0 ? (
                         user.address.map((addr, index) => (
-                            <Box key={index} fontSize="md" p={3} mb={3} bg="transparent" borderRadius="md" boxShadow="md">
+                            <Box key={index} fontSize="md" p={3} mb={3} bg="transparent" >
                                 <HStack mb={4}  >
                                     {
                                         addr.isDefaultAddress && <Badge px={4} py={1} width={'fit-content'} colorScheme={addr.isDefaultAddress ? 'green' : 'blue'}>
@@ -103,7 +101,6 @@ const UserDetailsCard = ({ user }) => {
               
 
             </Box>
-        </Container>
     );
 };
 

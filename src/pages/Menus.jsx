@@ -37,6 +37,7 @@ const Menus = () => {
           onChange={handleChange}
           bg="gray.700"
           color="white"
+          mb={6}
       
           py={4}
           w={{ base: 'full', md: "full", lg: "220px" }}

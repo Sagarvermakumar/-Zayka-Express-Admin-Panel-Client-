@@ -11,7 +11,7 @@ const Header = ({ title, subtitle }) => {
         color="whiteAlpha.900"
         letterSpacing="wider"
         lineHeight="shorter"
-        bgGradient="linear(to-r, teal.100, #fff)" 
+        bgGradient="linear(to-r, #ffffffff, rgba(255, 255, 255, 1))" 
         bgClip="text"
         textShadow={`
           0 1px 1px rgba(0, 0, 0, 0.3),

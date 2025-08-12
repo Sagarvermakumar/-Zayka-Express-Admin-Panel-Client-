@@ -21,7 +21,7 @@ const Orders = () => {
   }, [dispatch, selectedDate]);
 
   return (
-    < >
+    <Box >
       {/* Header + Date Picker */}
       <Stack
         justify={{ sm: "start", md: "start", lg: "space-between" }}
@@ -69,7 +69,7 @@ const Orders = () => {
           subLabel={`No orders found for ${selectedDate}. Please try a different date or check back later.`}
         />
       )}
-    </>
+    </Box>
   );
 };
 
